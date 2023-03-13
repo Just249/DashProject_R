@@ -3,7 +3,9 @@ herokuapp link: https://data551-dashproject-python.herokuapp.com/
 Note: For some reason I have to pay inorder to get it running, will showcase to TA/Teacher that it is working.
 
 Here is a screenshot of it:
-![image](https://user-images.githubusercontent.com/61757423/222994209-ba896e75-e038-413a-a6e4-0013946778cf.png)
+![image](https://user-images.githubusercontent.com/61757423/224630758-567bb8c5-3c62-4b92-b3fd-51f9f23cb25b.png)
+
+<img width="527" alt="image" src="https://user-images.githubusercontent.com/61757423/224630737-57fbf2af-7048-4be6-8d68-0932d43ace5b.png">
 
 
 # Milestone 1 - Dashboard proposal
