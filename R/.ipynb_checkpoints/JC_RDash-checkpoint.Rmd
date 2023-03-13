@@ -1,0 +1,119 @@
+---
+title: "R-Dash"
+author: "Justin"
+date: "2023-03-12"
+output: html_document
+---
+
+```{r}
+
+r <- getOption('repos')
+r['CRAN'] <- 'http://cloud.r-project.org'
+options(repos=r)
+
+# ======================================================================
+
+# packages go here
+install.packages(c('readr', 'here', 'ggthemes', 'remotes','dashCoreComponents'))
+
+remotes::install_github("plotly/dashR", upgrade = "always")
+remotes::install_github('facultyai/dash-bootstrap-components@r-release')
+
+
+my_packages = c("randomForest", "data.table")
+
+install_if_missing = function(p) {
+  if (p %in% rownames(installed.packages()) == FALSE) {
+    install.packages(p)
+  }
+}
+
+invisible(sapply(my_packages, install_if_missing))
+```
+
+```{r}
+library(dash)
+library(dashHtmlComponents)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+app = Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
+df = read.csv('../data/Sleep_Efficiency.csv')
+
+df$Alcohol.consumption[is.na(df$Alcohol.consumption)] <- round(mean(df$Alcohol.consumption, na.rm = TRUE))
+df$Caffeine.consumption[is.na(df$Caffeine.consumption)] <- round(mean(df$Caffeine.consumption, na.rm = TRUE))
+df$Awakenings[is.na(df$Awakenings)] <- round(mean(df$Awakenings, na.rm = TRUE))
+df$Exercise.frequency[is.na(df$Exercise.frequency)] <- round(mean(df$Exercise.frequency, na.rm = TRUE))
+
+age_bins = c(0, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, max(df$Age))
+age_bins_labels = c('0-15','15-20','21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','60+')
+df$binnedAge = cut(df$Age, breaks=age_bins, labels=age_bins_labels)
+
+
+
+
+
+
+app$layout(
+  htmlDiv(
+    
+    dccGraph(
+    sleepeffdf = 
+        df %>% 
+        select(binnedAge, Sleep.efficiency, Gender) %>%
+        group_by(binnedAge) %>%
+        mutate(meansleep = mean(Sleep.efficiency, na.rm = TRUE)) 
+    
+    age_sleepeff_line2 = ggplot(sleepeffdf, aes(x = binnedAge, y = meansleep, color = Gender)) + 
+    geom_point(size = 5, color="red") +
+    geom_line() +  
+    scale_color_manual(values = c('#3493bf', '#c74448')) +
+    labs(title = "Sleep efficiency % by Age Group",
+       x = "Age Groups",
+       y = "Mean Sleep efficiency (%)",
+       color = "Gender") +
+    theme(axis.title.x = element_text(size = 25), 
+        axis.title.y = element_text(size = 25), 
+        plot.title = element_text(size = 30, hjust = 0.5),
+        axis.text.y = element_text(size = 14),
+        axis.text.x = element_text(size = 14)) 
+    
+    age_sleepeff_line2
+     )
+  )
+)
+
+app$run_server(debug = T)
+
+```
+
+
+```{r}
+app %>% set_layout(
+  h1('Hello Dash'),
+  div("Dash: A web application framework for your data."),
+  dccGraph(
+    figure = list(
+      data = list(
+        list(
+          x = list(1, 2, 3),
+          y = list(4, 1, 2),
+          type = 'bar',
+          name = 'SF'
+        ),
+        list(
+          x = list(1, 2, 3),
+          y = list(2, 4, 5),
+          type = 'bar',
+          name = 'Montr\U{00E9}al'
+        )
+      ),
+      layout = list(title = 'Dash Data Visualization')
+    )
+  )
+)
+
+app$run_server(host = '0.0.0.0')
+```
+
