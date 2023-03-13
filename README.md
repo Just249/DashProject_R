@@ -1,4 +1,4 @@
-herokuapp link: https://data551-dashproject-python.herokuapp.com/
+herokuapp link: https://mds-dash-r.herokuapp.com/
 
 Note: For some reason I have to pay inorder to get it running, will showcase to TA/Teacher that it is working.
 
