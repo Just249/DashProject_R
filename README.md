@@ -5,10 +5,10 @@ Note: For some reason I have to pay inorder to get it running, will showcase to 
 Here is a screenshot of it:
 ![image](https://user-images.githubusercontent.com/61757423/224630758-567bb8c5-3c62-4b92-b3fd-51f9f23cb25b.png)
 
-<img width="527" alt="image" src="https://user-images.githubusercontent.com/61757423/224630737-57fbf2af-7048-4be6-8d68-0932d43ace5b.png">
+![image](https://user-images.githubusercontent.com/61757423/224631006-22340e3a-709c-4f50-b19a-73abf2f2ecec.png)
 
 
-# Milestone 1 - Dashboard proposal
+# Milestone 3 - R Dashboard
 ### Section 1: Motivation and Purpose of the dashboard
 
 > Our role: Data science consultancy firm
