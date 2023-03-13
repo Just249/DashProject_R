@@ -5,6 +5,7 @@
 * Making all the plots the same as in Python Dash and making them appear in the exact same locations as in the previous Dash.
 * Tooltip added
 * Zoom in feature
+* Deploy to heroku
 
 ### We were not able to implement the following in R Dash:
 * Interactivity in all the plots (except one) in the Dash
